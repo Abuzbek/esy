@@ -1,0 +1,32 @@
+table {
+  @apply w-full;
+}
+table thead {
+  border-bottom: 1px solid #E5E7EB;
+}
+table thead tr th {
+  @apply bg-[#F9FAFB] text-[#6B7280] text-xs font-medium px-6 py-3 uppercase text-left;
+}
+
+table tbody tr:nth-child(even) {
+  @apply bg-[#F9FAFB];
+}
+table tbody tr {
+  border-bottom: 1px solid #E5E7EB;
+}
+
+table tbody tr:last-child {
+  border-bottom-color: transparent;
+}
+
+table tbody tr td {
+  @apply  text-[#111827] text-sm font-medium px-6 py-4 uppercase;
+}
+
+input, select {
+  height: 38px;
+  padding: 9px 13px 9px 13px;
+  gap: 4px;
+  border-radius: 6px;
+  border: 1px solid #D1D5DB
+}
