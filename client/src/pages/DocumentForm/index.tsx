@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IDataConf } from "../../types";
+import api from "../../axios";
 
 const DocumentForm = () => {
   const [documentName, setDocumentName] = useState("");
@@ -53,7 +53,7 @@ const DocumentForm = () => {
             : null,
       })),
     };
-    axios
+    api
       .post("/api/v1/documents/create", payload)
       .then(() => navigate("/"))
       .catch((error) => console.error("Error creating document:", error));
@@ -86,21 +86,7 @@ const DocumentForm = () => {
                 onChange={(e) => handleFieldChange(index, e)}
               />
             </div>
-            <div className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                name="is_mandatory"
-                id="is_mandatory"
-                checked={field.is_mandatory}
-                onChange={(e) =>
-                  handleFieldChange(index, {
-                    // @ts-ignore
-                    target: { name: "is_mandatory", value: e.target.checked },
-                  })
-                }
-              />
-              <label htmlFor="is_mandatory">Is Mandatory:</label>
-            </div>
+            
             <div className="flex flex-col gap-1">
               <label htmlFor="field_type">Field Type:</label>
               <select
@@ -124,6 +110,21 @@ const DocumentForm = () => {
                 value={field.field_name}
                 onChange={(e) => handleFieldChange(index, e)}
               />
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                name="is_mandatory"
+                id="is_mandatory"
+                checked={field.is_mandatory}
+                onChange={(e) =>
+                  handleFieldChange(index, {
+                    // @ts-ignore
+                    target: { name: "is_mandatory", value: e.target.checked },
+                  })
+                }
+              />
+              <label htmlFor="is_mandatory">Is Mandatory:</label>
             </div>
 
             {field.field_type === "2" && (

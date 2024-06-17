@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document;
 use App\Models\DocumentConfiguration;
 use Illuminate\Http\Request;
-use App\Http\Resources\DocumentResource;
+
 class DocumentController extends Controller
 {
     public function getDocuments()
@@ -27,8 +27,8 @@ class DocumentController extends Controller
 
     public function getDocument($id)
     {
-        $documents = Document::with('fields')->get();
-        return DocumentResource::collection($documents);
+        $document = Document::with('fields')->select(['id', 'document_name', 'created_at'])->findOrFail($id);
+        return response()->json($document);
     }
 
     public function createDocument(Request $request)
